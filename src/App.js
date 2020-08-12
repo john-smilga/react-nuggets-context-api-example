@@ -1,25 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import list from './list';
 
 function App() {
+  const [people, setPeople] = useState(list);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <main>
+      <List people={people} />;
+    </main>
+  );
+}
+function List({ people }) {
+  return (
+    <section>
+      {people.map((person) => {
+        const { id, name } = person;
+        return <Person key={id} name={name} />;
+      })}
+    </section>
+  );
+}
+function Person({ name }) {
+  return (
+    <article>
+      <h3>{name}</h3>
+      <button>remove</button>
+    </article>
   );
 }
 
