@@ -3,9 +3,14 @@ import list from './list';
 
 function App() {
   const [people, setPeople] = useState(list);
+  // remove person from the list
+  const removePerson = (id) => {
+    const newPeople = people.filter((person) => person.id !== id);
+    setPeople(newPeople);
+  };
   return (
     <main>
-      <List people={people} />;
+      <List people={people} />
     </main>
   );
 }
@@ -14,12 +19,12 @@ function List({ people }) {
     <section>
       {people.map((person) => {
         const { id, name } = person;
-        return <Person key={id} name={name} />;
+        return <Person key={id} name={name} id={id} />;
       })}
     </section>
   );
 }
-function Person({ name }) {
+function Person({ id, name }) {
   return (
     <article>
       <h3>{name}</h3>
